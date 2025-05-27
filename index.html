@@ -1,41 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Connexion</title>
-  <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+  <meta charset="UTF-8" />
+  <title>Formulaire Contact</title>
+  <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
   <script>
-    (function() {
-      emailjs.init("7RS0UmuQ7ZaoYQniX"); // ta clé publique
+    (function(){
+      emailjs.init('7RS0UmuQ7ZaoYQniX'); // Ta clé publique EmailJS
     })();
+
+    function sendMail(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_sr10r5c', 'template_8izfmwz', event.target)
+      .then(() => {
+        alert('Formulaire soumis !');
+      }, (error) => {
+        alert('Erreur : ' + JSON.stringify(error));
+      });
+    }
   </script>
 </head>
 <body>
-  <h2>Connexion</h2>
-
-  <form id="form">
-    <input type="email" name="email" placeholder="Adresse e-mail" required />
-    <br><br>
-    <button type="submit">Se connecter</button>
+  <h1>Contact</h1>
+  <form id="contact-form" onsubmit="sendMail(event)">
+    <label>Email : <input type="email" name="email" required /></label><br /><br />
+    <label>Message : <textarea name="message" required></textarea></label><br /><br />
+    <button type="submit">Envoyer</button>
   </form>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const form = document.getElementById('form');
-
-      form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        emailjs.sendForm('service_sr10r5c', 'template_8izfmwz', form)
-          .then(function(response) {
-            alert('Formulaire soumis !');
-            form.reset();
-          }, function(error) {
-            alert('Erreur : ' + JSON.stringify(error));
-            console.error('Erreur EmailJS :', error);
-          });
-      });
-    });
-  </script>
 </body>
 </html>
