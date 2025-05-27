@@ -21,7 +21,6 @@
   <script>
     document.getElementById('form').addEventListener('submit', function(event) {
       event.preventDefault();
-      alert('Formulaire soumis !');
       emailjs.sendForm('service_sr10r5c', 'template_8izfmwz', this)
         .then(function() {
           alert('Infos envoyées !');
@@ -29,6 +28,7 @@
         }, function(error) {
           alert('Erreur lors de l’envoi. Regarde la console.');
           console.error('Erreur EmailJS:', error);
+          alert(JSON.stringify(error));
         });
     });
   </script>
