@@ -6,7 +6,7 @@
   <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
   <script>
     (function(){
-      emailjs.init("7RS0UmuQ7ZaoYQniX"); // Ta Public Key
+      emailjs.init("7RS0UmuQ7ZaoYQniX");
     })();
   </script>
 </head>
@@ -21,14 +21,14 @@
   <script>
     document.getElementById('form').addEventListener('submit', function(event) {
       event.preventDefault();
-      alert('Formulaire soumis !');  // Pour vérifier que ça fonctionne
+      alert('Formulaire soumis !');
       emailjs.sendForm('service_sr10r5c', 'template_8izfmwz', this)
         .then(function() {
           alert('Infos envoyées !');
           document.getElementById('form').reset();
         }, function(error) {
-          alert('Erreur lors de l’envoi.');
-          console.log('Erreur :', error);
+          alert('Erreur lors de l’envoi. Regarde la console.');
+          console.error('Erreur EmailJS:', error);
         });
     });
   </script>
