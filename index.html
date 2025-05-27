@@ -6,7 +6,7 @@
   <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
   <script>
     (function() {
-      emailjs.init("7RS0UmuQ7ZaoYQniX"); // Ta clé publique EmailJS
+      emailjs.init("7RS0UmuQ7ZaoYQniX"); // ta clé publique
     })();
   </script>
 </head>
@@ -20,10 +20,22 @@
   </form>
 
   <script>
-    document.getElementById('form').addEventListener('submit', function(event) {
-      event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('form');
 
-      emailjs.sendForm('service_sr10r5c', 'template_8izfmwz', this)
-        .then(function(response) {
-          alert('Formulaire soumis !');
-          document.getElementById('form').reset();
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        emailjs.sendForm('service_sr10r5c', 'template_8izfmwz', form)
+          .then(function(response) {
+            alert('Formulaire soumis !');
+            form.reset();
+          }, function(error) {
+            alert('Erreur : ' + JSON.stringify(error));
+            console.error('EmailJS error:', error);
+          });
+      });
+    });
+  </script>
+</body>
+</html>
