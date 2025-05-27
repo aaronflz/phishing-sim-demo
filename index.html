@@ -21,6 +21,7 @@
   <script>
     document.getElementById('form').addEventListener('submit', function(event) {
       event.preventDefault();
+      alert('Formulaire soumis !');  // Pour vérifier que ça fonctionne
       emailjs.sendForm('service_sr10r5c', 'template_8izfmwz', this)
         .then(function() {
           alert('Infos envoyées !');
